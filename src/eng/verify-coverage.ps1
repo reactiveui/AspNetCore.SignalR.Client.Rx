@@ -19,17 +19,17 @@ $coverageDocuments = @(
 
 $variants = @(
     @{
-        Name = 'CP.AspNetCore.SignalR.Client.Rx'
+        Name = 'ReactiveUI.AspNetCore.SignalR.Client.Rx'
         Match = {
-            $_.name.StartsWith('CP.AspNetCore.SignalR.Client.Rx.', [System.StringComparison]::Ordinal) -and
-                -not $_.name.StartsWith('CP.AspNetCore.SignalR.Client.Rx.Reactive.', [System.StringComparison]::Ordinal) -and
+            $_.name.StartsWith('ReactiveUI.AspNetCore.SignalR.Client.Rx.', [System.StringComparison]::Ordinal) -and
+                -not $_.name.StartsWith('ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive.', [System.StringComparison]::Ordinal) -and
                 -not $_.name.Contains('.Tests', [System.StringComparison]::Ordinal)
         }
     },
     @{
-        Name = 'CP.AspNetCore.SignalR.Client.Rx.Reactive'
+        Name = 'ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive'
         Match = {
-            $_.name.StartsWith('CP.AspNetCore.SignalR.Client.Rx.Reactive.', [System.StringComparison]::Ordinal) -and
+            $_.name.StartsWith('ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive.', [System.StringComparison]::Ordinal) -and
                 -not $_.name.Contains('.Tests', [System.StringComparison]::Ordinal)
         }
     }

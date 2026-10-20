@@ -11,10 +11,10 @@
   <Project Path="../build/_build.csproj">
     <Build Project="false" />
   </Project>
-  <Project Path="CP.AspNetCore.SignalR.Client.Rx.Tests/CP.AspNetCore.SignalR.Client.Rx.Tests.csproj" />
-  <Project Path="CP.AspNetCore.SignalR.Client.Rx.Reactive.Tests/CP.AspNetCore.SignalR.Client.Rx.Reactive.Tests.csproj" />
-  <Project Path="CP.AspNetCore.SignalR.Client.Rx/CP.AspNetCore.SignalR.Client.Rx.csproj" />
-  <Project Path="CP.AspNetCore.SignalR.Client.Rx.Reactive/CP.AspNetCore.SignalR.Client.Rx.Reactive.csproj" />
+  <Project Path="ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive.Tests/ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive.Tests.csproj" />
+  <Project Path="ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive/ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive.csproj" />
+  <Project Path="ReactiveUI.AspNetCore.SignalR.Client.Rx.Tests/ReactiveUI.AspNetCore.SignalR.Client.Rx.Tests.csproj" />
+  <Project Path="ReactiveUI.AspNetCore.SignalR.Client.Rx/ReactiveUI.AspNetCore.SignalR.Client.Rx.csproj" />
   <Project Path="SampleWeb/SignalRChat.csproj" />
   <Project Path="WpfClient/SignalRChatClient.csproj" />
 </Solution>

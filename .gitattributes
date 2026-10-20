@@ -1,0 +1,2 @@
+# C# analyzers require LF even when Windows enables core.autocrlf.
+*.cs text eol=lf

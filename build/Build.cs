@@ -1,14 +1,14 @@
-// Copyright (c) 2019-2026 Chris Pulman and contributors. All rights reserved.
-// Chris Pulman and contributors licenses this file to you under the MIT license.
+// Copyright (c) 2019-2026 ReactiveUI Association Incorporated. All rights reserved.
+// ReactiveUI Association Incorporated licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-namespace CP.AspNetCore.SignalR.Client.Rx.Build;
+namespace ReactiveUI.AspNetCore.SignalR.Client.Rx.Build;
 
 /// <summary>Defines the repository build pipeline.</summary>
 public sealed class Build : NukeBuild
 {
     /// <summary>Gets the repository solution that the build pipeline operates on.</summary>
-    private static readonly AbsolutePath SolutionFile = RootDirectory / "src" / "CP.AspNetCore.SignalR.Client.Rx.slnx";
+    private static readonly AbsolutePath SolutionFile = RootDirectory / "src" / "ReactiveUI.AspNetCore.SignalR.Client.Rx.slnx";
 
     /// <summary>Gets or sets the build configuration.</summary>
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]

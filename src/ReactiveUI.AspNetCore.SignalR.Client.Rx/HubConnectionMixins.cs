@@ -1,11 +1,11 @@
-// Copyright (c) 2019-2026 Chris Pulman and contributors. All rights reserved.
-// Chris Pulman and contributors licenses this file to you under the MIT license.
+// Copyright (c) 2019-2026 ReactiveUI Association Incorporated. All rights reserved.
+// ReactiveUI Association Incorporated licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 #if REACTIVE_SHIM
-namespace CP.AspNetCore.SignalR.Client.Rx.Reactive;
+namespace ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive;
 #else
-namespace CP.AspNetCore.SignalR.Client.Rx;
+namespace ReactiveUI.AspNetCore.SignalR.Client.Rx;
 #endif
 
 /// <summary>HubConnection Mixins.</summary>
@@ -40,6 +40,7 @@ public static class HubConnectionMixins
         /// <param name="retryCount">Number of retry attempts on failure. Default infinite (<c>null</c>).</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>An Observable that completes when the connection has started.</returns>
+        /// <exception cref="ArgumentNullException">The connection is null.</exception>
         public IObservable<RxVoid> StartObservable(int? retryCount, CancellationToken cancellationToken)
         {
             _ = connection ?? throw new ArgumentNullException(nameof(connection));
@@ -51,6 +52,7 @@ public static class HubConnectionMixins
         /// <summary>Ensure a connection is started. If already connected, completes immediately.</summary>
         /// <returns>An observable that completes when the connection has started.</returns>
         /// <exception cref="ArgumentNullException">connection.</exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IObservable<RxVoid> EnsureStarted() => connection.EnsureStarted(default);
 
         /// <summary>Ensure a connection is started. If already connected, completes immediately.</summary>
@@ -145,6 +147,7 @@ public static class HubConnectionMixins
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <param name="args">Arguments for the hub method.</param>
         /// <returns>A <see cref="IObservable{T}"/> that represents the stream.</returns>
+        /// <exception cref="ArgumentNullException">The connection is null.</exception>
         public IObservable<T> StreamObservable<T>(HubMethod<T> method, CancellationToken cancellationToken, params object?[] args)
         {
             _ = connection ?? throw new ArgumentNullException(nameof(connection));
@@ -241,9 +244,9 @@ public static class HubConnectionMixins
 
                 connection.Closed += ClosedHandler;
 
-                return Disposable.Create<(HubConnection connection, Func<Exception?, Task> handler)>(
+                return Disposable.Create<(HubConnection Connection, Func<Exception?, Task> Handler)>(
                     (connection, ClosedHandler),
-                    static state => state.connection.Closed -= state.handler);
+                    static state => state.Connection.Closed -= state.Handler);
             });
         }
 
@@ -264,9 +267,9 @@ public static class HubConnectionMixins
 
                 connection.Reconnecting += ReconnectingHandler;
 
-                return Disposable.Create<(HubConnection connection, Func<Exception?, Task> handler)>(
+                return Disposable.Create<(HubConnection Connection, Func<Exception?, Task> Handler)>(
                     (connection, ReconnectingHandler),
-                    static state => state.connection.Reconnecting -= state.handler);
+                    static state => state.Connection.Reconnecting -= state.Handler);
             });
         }
 
@@ -287,9 +290,9 @@ public static class HubConnectionMixins
 
                 connection.Reconnected += ReconnectedHandler;
 
-                return Disposable.Create<(HubConnection connection, Func<string?, Task> handler)>(
+                return Disposable.Create<(HubConnection Connection, Func<string?, Task> Handler)>(
                     (connection, ReconnectedHandler),
-                    static state => state.connection.Reconnected -= state.handler);
+                    static state => state.Connection.Reconnected -= state.Handler);
             });
         }
 
@@ -326,6 +329,7 @@ public static class HubConnectionMixins
     {
         /// <summary>Starts the specified connection.</summary>
         /// <returns>Observable HubConnection.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IObservable<HubConnection> Start() =>
             connection.SelectMany(x => x.StartObservable().Select(_ => x));
 
@@ -334,6 +338,7 @@ public static class HubConnectionMixins
         /// <returns>
         /// Observable HubConnection.
         /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IObservable<HubConnection> Start(CancellationToken cancellationToken) =>
             connection.SelectMany(x => x.StartObservable(cancellationToken).Select(_ => x));
 
@@ -341,6 +346,7 @@ public static class HubConnectionMixins
         /// <param name="retryCount">Number of retry attempts on failure. Default infinite (<c>null</c>).</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>Observable HubConnection.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IObservable<HubConnection> Start(int? retryCount, CancellationToken cancellationToken) =>
             connection.SelectMany(x => x.StartObservable(retryCount, cancellationToken).Select(_ => x));
     }
@@ -353,6 +359,7 @@ public static class HubConnectionMixins
         /// <summary>Starts the specified connection.</summary>
         /// <param name="connection">The connection.</param>
         /// <returns>Observable HubConnection.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IObservable<HubConnection> Start(HubConnection connection) =>
             ignore.Select(_ => connection).SelectMany(x => x.StartObservable().Select(_ => x));
 
@@ -362,6 +369,7 @@ public static class HubConnectionMixins
         /// <returns>
         /// Observable HubConnection.
         /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IObservable<HubConnection> Start(HubConnection connection, CancellationToken cancellationToken) =>
             ignore.Select(_ => connection).SelectMany(x => x.StartObservable(cancellationToken).Select(_ => x));
 
@@ -370,6 +378,7 @@ public static class HubConnectionMixins
         /// <param name="retryCount">Number of retry attempts on failure. Default infinite (<c>null</c>).</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Observable HubConnection.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IObservable<HubConnection> Start(HubConnection connection, int? retryCount, CancellationToken cancellationToken) =>
             ignore.Select(_ => connection).SelectMany(x => x.StartObservable(retryCount, cancellationToken).Select(_ => x));
     }

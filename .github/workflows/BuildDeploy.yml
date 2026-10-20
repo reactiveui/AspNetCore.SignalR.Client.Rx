@@ -36,7 +36,7 @@ permissions:
 
 env:
   configuration: Release
-  solutionFile: CP.AspNetCore.SignalR.Client.Rx.slnx
+  solutionFile: ReactiveUI.AspNetCore.SignalR.Client.Rx.slnx
   solutionFolder: src
   minMajorMinorVersion: '1.6'
 
@@ -233,11 +233,11 @@ jobs:
           MinVerVersionOverride: ${{ steps.minver.outputs.SemVer2 }}
         run: |
           dotnet pack --no-build --no-restore --configuration "${{ env.configuration }}" \
-            CP.AspNetCore.SignalR.Client.Rx/CP.AspNetCore.SignalR.Client.Rx.csproj \
+            ReactiveUI.AspNetCore.SignalR.Client.Rx/ReactiveUI.AspNetCore.SignalR.Client.Rx.csproj \
             -o "${GITHUB_WORKSPACE}/packages" \
             -p:MinVerVersionOverride="${{ steps.minver.outputs.SemVer2 }}"
           dotnet pack --no-build --no-restore --configuration "${{ env.configuration }}" \
-            CP.AspNetCore.SignalR.Client.Rx.Reactive/CP.AspNetCore.SignalR.Client.Rx.Reactive.csproj \
+            ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive/ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive.csproj \
             -o "${GITHUB_WORKSPACE}/packages" \
             -p:MinVerVersionOverride="${{ steps.minver.outputs.SemVer2 }}"
 

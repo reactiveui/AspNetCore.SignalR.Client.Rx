@@ -53,7 +53,7 @@ jobs:
         shell: bash
         working-directory: 'src'
         run: |
-          dotnet test --solution CP.AspNetCore.SignalR.Client.Rx.slnx \
+          dotnet test --solution ReactiveUI.AspNetCore.SignalR.Client.Rx.slnx \
             --configuration Release \
             --no-build \
             --max-parallel-test-modules 1 \

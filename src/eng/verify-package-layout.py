@@ -10,8 +10,8 @@ from xml.etree import ElementTree
 
 
 EXPECTED_PACKAGES = {
-    "CP.AspNetCore.SignalR.Client.Rx": "ReactiveUI.Primitives",
-    "CP.AspNetCore.SignalR.Client.Rx.Reactive": "ReactiveUI.Primitives.Reactive",
+    "ReactiveUI.AspNetCore.SignalR.Client.Rx": "ReactiveUI.Primitives",
+    "ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive": "ReactiveUI.Primitives.Reactive",
 }
 EXPECTED_FRAMEWORKS = {
     "net462",

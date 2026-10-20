@@ -1,11 +1,11 @@
-// Copyright (c) 2019-2026 Chris Pulman and contributors. All rights reserved.
-// Chris Pulman and contributors licenses this file to you under the MIT license.
+// Copyright (c) 2019-2026 ReactiveUI Association Incorporated. All rights reserved.
+// ReactiveUI Association Incorporated licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 #if REACTIVE_SHIM
-namespace CP.AspNetCore.SignalR.Client.Rx.Reactive.Tests;
+namespace ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive.Tests;
 #else
-namespace CP.AspNetCore.SignalR.Client.Rx.Tests;
+namespace ReactiveUI.AspNetCore.SignalR.Client.Rx.Tests;
 #endif
 
 /// <summary>SignalR hub used by the observable extension tests.</summary>
@@ -17,17 +17,20 @@ public sealed class TestHub(TestHubEvents events) : Hub
 
     /// <summary>Sends a parameterless callback to the caller.</summary>
     /// <returns>A task that represents the asynchronous send operation.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Task SendPing() => Clients.Caller.SendAsync("Ping");
 
     /// <summary>Sends a single value callback to the caller.</summary>
     /// <param name="value">The value to echo.</param>
     /// <returns>A task that represents the asynchronous send operation.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Task SendEcho(string value) => Clients.Caller.SendAsync("Echo", value);
 
     /// <summary>Sends a two value callback to the caller.</summary>
     /// <param name="left">The first value.</param>
     /// <param name="right">The second value.</param>
     /// <returns>A task that represents the asynchronous send operation.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Task SendPair(string left, string right) => Clients.Caller.SendAsync("Pair", left, right);
 
     /// <summary>Sends a variable number of integer callback arguments to the caller.</summary>
@@ -46,6 +49,7 @@ public sealed class TestHub(TestHubEvents events) : Hub
     }
 
     /// <summary>Aborts the current connection so automatic reconnect behavior can be observed.</summary>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void AbortConnection() => Context.Abort();
 
     /// <summary>Returns the supplied value.</summary>
@@ -60,6 +64,7 @@ public sealed class TestHub(TestHubEvents events) : Hub
     /// <summary>Stores a notification for the test to read.</summary>
     /// <param name="value">The notification value.</param>
     /// <returns>A task that represents the asynchronous write operation.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Task Store(string value) => events.WriteNotificationAsync(value).AsTask();
 
     /// <summary>Streams three values using async enumerable streaming.</summary>

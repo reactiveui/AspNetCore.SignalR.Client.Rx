@@ -17,8 +17,8 @@
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>
 
-    <PackageProjectUrl>https://github.com/ChrisPulman/CP.AspNetCore.SignalR.Client.Rx</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/ChrisPulman/CP.AspNetCore.SignalR.Client.Rx</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/ReactiveUI/AspNetCore.SignalR.Client.Rx</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ReactiveUI/AspNetCore.SignalR.Client.Rx</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <!--https://devblogs.microsoft.com/dotnet/producing-packages-with-source-link/-->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
