@@ -1,11 +1,11 @@
-// Copyright (c) 2019-2026 Chris Pulman and contributors. All rights reserved.
-// Chris Pulman and contributors licenses this file to you under the MIT license.
+// Copyright (c) 2019-2026 ReactiveUI Association Incorporated. All rights reserved.
+// ReactiveUI Association Incorporated licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 #if REACTIVE_SHIM
-namespace CP.AspNetCore.SignalR.Client.Rx.Reactive.Tests;
+namespace ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive.Tests;
 #else
-namespace CP.AspNetCore.SignalR.Client.Rx.Tests;
+namespace ReactiveUI.AspNetCore.SignalR.Client.Rx.Tests;
 #endif
 
 /// <summary>Tests observable hub connection extension methods.</summary>
@@ -52,15 +52,6 @@ public sealed class HubConnectionMixinsTests
 
     /// <summary>The eighth callback value.</summary>
     private const int EighthValue = 8;
-
-    /// <summary>The backing field for the closed event.</summary>
-    private static readonly FieldInfo ClosedEventField = GetEventField(nameof(HubConnection.Closed));
-
-    /// <summary>The backing field for the reconnecting event.</summary>
-    private static readonly FieldInfo ReconnectingEventField = GetEventField(nameof(HubConnection.Reconnecting));
-
-    /// <summary>The backing field for the reconnected event.</summary>
-    private static readonly FieldInfo ReconnectedEventField = GetEventField(nameof(HubConnection.Reconnected));
 
     /// <summary>The maximum duration of an asynchronous test operation.</summary>
     private static readonly TimeSpan TestTimeout = TimeSpan.FromSeconds(5);
@@ -182,7 +173,7 @@ public sealed class HubConnectionMixinsTests
         await using var app = await SignalRTestApp.CreateAsync();
         var ping = new TaskCompletionSource<RxVoid>(TaskCreationOptions.RunContinuationsAsynchronously);
         var echo = new TaskCompletionSource<string>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var pair = new TaskCompletionSource<(string t1, string t2)>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var pair = new TaskCompletionSource<(string Value1, string Value2)>(TaskCreationOptions.RunContinuationsAsynchronously);
 
         using var pingSubscription = app.Connection.On("Ping").Subscribe(value => ping.TrySetResult(value));
         using var echoSubscription = app.Connection.On(new HubMethod<string>("Echo")).Subscribe(value => echo.TrySetResult(value));
@@ -198,8 +189,8 @@ public sealed class HubConnectionMixinsTests
         await Assert.That(await echo.Task.WaitAsync(TestTimeout)).IsEqualTo("hello");
 
         var actualPair = await pair.Task.WaitAsync(TestTimeout);
-        await Assert.That(actualPair.t1).IsEqualTo("left");
-        await Assert.That(actualPair.t2).IsEqualTo("right");
+        await Assert.That(actualPair.Value1).IsEqualTo("left");
+        await Assert.That(actualPair.Value2).IsEqualTo("right");
     }
 
     /// <summary>Verifies that every supported callback arity emits its strongly typed tuple.</summary>
@@ -208,12 +199,12 @@ public sealed class HubConnectionMixinsTests
     public async Task OnMethodsExposeAllSupportedTupleArities()
     {
         await using var app = await SignalRTestApp.CreateAsync();
-        var triple = new TaskCompletionSource<(int t1, int t2, int t3)>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var quadruple = new TaskCompletionSource<(int t1, int t2, int t3, int t4)>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var quintuple = new TaskCompletionSource<(int t1, int t2, int t3, int t4, int t5)>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var sextuple = new TaskCompletionSource<(int t1, int t2, int t3, int t4, int t5, int t6)>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var septuple = new TaskCompletionSource<(int t1, int t2, int t3, int t4, int t5, int t6, int t7)>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var octuple = new TaskCompletionSource<(int t1, int t2, int t3, int t4, int t5, int t6, int t7, int t8)>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var triple = new TaskCompletionSource<(int Value1, int Value2, int Value3)>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var quadruple = new TaskCompletionSource<(int Value1, int Value2, int Value3, int Value4)>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var quintuple = new TaskCompletionSource<(int Value1, int Value2, int Value3, int Value4, int Value5)>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var sextuple = new TaskCompletionSource<(int Value1, int Value2, int Value3, int Value4, int Value5, int Value6)>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var septuple = new TaskCompletionSource<(int Value1, int Value2, int Value3, int Value4, int Value5, int Value6, int Value7)>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var octuple = new TaskCompletionSource<(int Value1, int Value2, int Value3, int Value4, int Value5, int Value6, int Value7, int Value8)>(TaskCreationOptions.RunContinuationsAsynchronously);
 
         using var tripleSubscription = app.Connection.On(new HubMethod<(int, int, int)>("Triple")).Subscribe(value => triple.TrySetResult(value));
         using var quadrupleSubscription = app.Connection.On(new HubMethod<(int, int, int, int)>("Quadruple")).Subscribe(value => quadruple.TrySetResult(value));
@@ -230,12 +221,12 @@ public sealed class HubConnectionMixinsTests
         await app.Connection.InvokeAsync(SendValuesMethod, "Septuple", SeventhValue).WaitAsync(TestTimeout);
         await app.Connection.InvokeAsync(SendValuesMethod, "Octuple", EighthValue).WaitAsync(TestTimeout);
 
-        await Assert.That((await triple.Task.WaitAsync(TestTimeout)).t3).IsEqualTo(ThirdValue);
-        await Assert.That((await quadruple.Task.WaitAsync(TestTimeout)).t4).IsEqualTo(FourthValue);
-        await Assert.That((await quintuple.Task.WaitAsync(TestTimeout)).t5).IsEqualTo(FifthValue);
-        await Assert.That((await sextuple.Task.WaitAsync(TestTimeout)).t6).IsEqualTo(SixthValue);
-        await Assert.That((await septuple.Task.WaitAsync(TestTimeout)).t7).IsEqualTo(SeventhValue);
-        await Assert.That((await octuple.Task.WaitAsync(TestTimeout)).t8).IsEqualTo(EighthValue);
+        await Assert.That((await triple.Task.WaitAsync(TestTimeout)).Value3).IsEqualTo(ThirdValue);
+        await Assert.That((await quadruple.Task.WaitAsync(TestTimeout)).Value4).IsEqualTo(FourthValue);
+        await Assert.That((await quintuple.Task.WaitAsync(TestTimeout)).Value5).IsEqualTo(FifthValue);
+        await Assert.That((await sextuple.Task.WaitAsync(TestTimeout)).Value6).IsEqualTo(SixthValue);
+        await Assert.That((await septuple.Task.WaitAsync(TestTimeout)).Value7).IsEqualTo(SeventhValue);
+        await Assert.That((await octuple.Task.WaitAsync(TestTimeout)).Value8).IsEqualTo(EighthValue);
     }
 
     /// <summary>Verifies that invoke and send helpers forward hub method calls.</summary>
@@ -357,41 +348,24 @@ public sealed class HubConnectionMixinsTests
         var closed = new TaskCompletionSource<Exception?>(TaskCreationOptions.RunContinuationsAsynchronously);
         var reconnecting = new TaskCompletionSource<Exception?>(TaskCreationOptions.RunContinuationsAsynchronously);
         var reconnected = new TaskCompletionSource<string?>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var reconnectingError = new InvalidOperationException("Reconnect requested.");
-        const string ReconnectedId = "reconnected-id";
-
         using var closedSubscription = app.Connection.HasClosed().Subscribe(error => closed.TrySetResult(error));
         using var reconnectingSubscription = app.Connection.IsReconnecting().Subscribe(error => reconnecting.TrySetResult(error));
         using var reconnectedSubscription = app.Connection.HasReconnected().Subscribe(connectionId => reconnected.TrySetResult(connectionId));
         using var stateSubscription = app.Connection.StateChanges().Subscribe(static state => Debug.WriteLine(state));
 
-        await RaiseEventAsync(ReconnectingEventField, app.Connection, reconnectingError);
-        await RaiseEventAsync(ReconnectedEventField, app.Connection, ReconnectedId);
-        await RaiseEventAsync(ClosedEventField, app.Connection, (Exception?)null);
+        await app.Connection.StartAsync().WaitAsync(TestTimeout);
+        var originalId = app.Connection.ConnectionId;
+        app.FailNextPoll();
+        await app.Connection.SendAsync("SendPing").WaitAsync(TestTimeout);
 
-        await Assert.That(await reconnecting.Task.WaitAsync(TestTimeout)).IsSameReferenceAs(reconnectingError);
-        await Assert.That(await reconnected.Task.WaitAsync(TestTimeout)).IsEqualTo(ReconnectedId);
+        await Assert.That(await reconnecting.Task.WaitAsync(TestTimeout)).IsTypeOf<System.Net.Http.HttpRequestException>();
+        var reconnectedId = await reconnected.Task.WaitAsync(TestTimeout);
+        await Assert.That(reconnectedId).IsNotNull();
+        await Assert.That(reconnectedId).IsNotEqualTo(originalId);
+        await Assert.That(app.Connection.ConnectionId).IsEqualTo(reconnectedId);
+        await Assert.That(app.Connection.State).IsEqualTo(HubConnectionState.Connected);
+        await app.Connection.StopAsync().WaitAsync(TestTimeout);
         await Assert.That(await closed.Task.WaitAsync(TestTimeout)).IsNull();
-    }
-
-    /// <summary>Gets a non-public SignalR event backing field.</summary>
-    /// <param name="eventName">The event name.</param>
-    /// <returns>The event backing field.</returns>
-    private static FieldInfo GetEventField(string eventName) =>
-        typeof(HubConnection).GetField(eventName, BindingFlags.Instance | BindingFlags.NonPublic)
-        ?? throw new MissingFieldException(typeof(HubConnection).FullName, eventName);
-
-    /// <summary>Raises a registered SignalR lifecycle event.</summary>
-    /// <typeparam name="T">The event argument type.</typeparam>
-    /// <param name="eventField">The event backing field.</param>
-    /// <param name="connection">The connection whose handlers are invoked.</param>
-    /// <param name="argument">The event argument.</param>
-    /// <returns>A task that represents completion of the registered handlers.</returns>
-    private static async Task RaiseEventAsync<T>(FieldInfo eventField, HubConnection connection, T argument)
-    {
-        var handler = (Func<T, Task>?)eventField.GetValue(connection)
-            ?? throw new InvalidOperationException($"The {eventField.Name} event has no registered handler.");
-        await handler(argument).ConfigureAwait(false);
     }
 
     /// <summary>Counts failed SignalR negotiation requests.</summary>

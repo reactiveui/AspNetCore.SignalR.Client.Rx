@@ -21,12 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CP.AspNetCore.SignalR.Client.Rx.Reactive\CP.AspNetCore.SignalR.Client.Rx.Reactive.csproj" />
+    <ProjectReference Include="..\ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive\ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\CP.AspNetCore.SignalR.Client.Rx.Tests\**\*.cs"
-             Exclude="..\CP.AspNetCore.SignalR.Client.Rx.Tests\bin\**;..\CP.AspNetCore.SignalR.Client.Rx.Tests\obj\**"
+    <Compile Include="..\ReactiveUI.AspNetCore.SignalR.Client.Rx.Tests\**\*.cs"
+             Exclude="..\ReactiveUI.AspNetCore.SignalR.Client.Rx.Tests\bin\**;..\ReactiveUI.AspNetCore.SignalR.Client.Rx.Tests\obj\**"
              Link="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 

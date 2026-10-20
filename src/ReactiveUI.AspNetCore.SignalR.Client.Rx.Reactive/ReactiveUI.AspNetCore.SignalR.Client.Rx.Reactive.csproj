@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\CP.AspNetCore.SignalR.Client.Rx\**\*.cs"
-             Exclude="..\CP.AspNetCore.SignalR.Client.Rx\bin\**;..\CP.AspNetCore.SignalR.Client.Rx\obj\**"
+    <Compile Include="..\ReactiveUI.AspNetCore.SignalR.Client.Rx\**\*.cs"
+             Exclude="..\ReactiveUI.AspNetCore.SignalR.Client.Rx\bin\**;..\ReactiveUI.AspNetCore.SignalR.Client.Rx\obj\**"
              Link="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 

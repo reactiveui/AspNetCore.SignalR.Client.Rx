@@ -1,21 +1,21 @@
-﻿# CP.AspNetCore.SignalR.Client.Rx
+# ReactiveUI.AspNetCore.SignalR.Client.Rx
 ReactiveUI.Primitives extensions for Microsoft.AspNetCore.SignalR.Client.
 
 ## Installation
 
 ```powershell
-Install-Package CP.AspNetCore.SignalR.Client.Rx
+Install-Package ReactiveUI.AspNetCore.SignalR.Client.Rx
 ```
 
 Use the lean package above when the application does not otherwise depend on System.Reactive. Applications that require System.Reactive interoperability can install the shared-source variant:
 
 ```powershell
-Install-Package CP.AspNetCore.SignalR.Client.Rx.Reactive
+Install-Package ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive
 ```
 
 ## Overview
 
-CP.AspNetCore.SignalR.Client.Rx provides high-performance, memory-efficient observable APIs for SignalR client applications. The lean package is based on `ReactiveUI.Primitives`; the `.Reactive` package uses `ReactiveUI.Primitives.Reactive` and the `CP.AspNetCore.SignalR.Client.Rx.Reactive` namespace.
+ReactiveUI.AspNetCore.SignalR.Client.Rx provides high-performance, memory-efficient observable APIs for SignalR client applications. The lean package is based on `ReactiveUI.Primitives`; the `.Reactive` package uses `ReactiveUI.Primitives.Reactive` and the `ReactiveUI.AspNetCore.SignalR.Client.Rx.Reactive` namespace.
 
 - **Targets:** .NET Framework 4.6.2, .NET 8, .NET 9, .NET 10, and .NET 11
 - **Supports:** WPF, WinForms, Console, ASP.NET Core, Razor Pages, and more
@@ -23,7 +23,7 @@ CP.AspNetCore.SignalR.Client.Rx provides high-performance, memory-efficient obse
 ## Quick Start
 
 ```csharp
-using CP.AspNetCore.SignalR.Client.Rx;
+using ReactiveUI.AspNetCore.SignalR.Client.Rx;
 using Microsoft.AspNetCore.SignalR.Client;
 
 var connection = new HubConnectionBuilder()
@@ -43,17 +43,17 @@ connection.StartObservable().Subscribe();
 ### Using HubBuilder for Lifecycle Management
 
 ```csharp
-using CP.AspNetCore.SignalR.Client.Rx;
+using ReactiveUI.AspNetCore.SignalR.Client.Rx;
 
 HubBuilder.Create(builder => builder.WithUrl("https://localhost:53933/ChatHub"))
     .Subscribe(x =>
     {
-        var connection = x.hubConnection;
-        var disposables = x.disposables;
+        var connection = x.HubConnection;
+        var disposables = x.Disposables;
 
         // Listen for messages
         disposables.Add(connection.On(new HubMethod<(string, string)>("ReceiveMessage"))
-            .Subscribe(msg => Console.WriteLine($"{msg.t1}: {msg.t2}")));
+            .Subscribe(msg => Console.WriteLine($"{msg.Value1}: {msg.Value2}")));
 
         // Handle connection closed
         disposables.Add(connection.HasClosed().Subscribe(error =>
@@ -101,7 +101,7 @@ connection.WaitForState(HubConnectionState.Connected)
 
 ```csharp
 @page
-@using CP.AspNetCore.SignalR.Client.Rx
+@using ReactiveUI.AspNetCore.SignalR.Client.Rx
 @inject Microsoft.AspNetCore.SignalR.Client.HubConnection Connection
 
 @functions {
@@ -163,4 +163,4 @@ MIT
 ---
 
 
-**CP.AspNetCore.SignalR.Client.Rx** - Empowering Industrial Automation with Reactive Technology ⚡🏭
+**ReactiveUI.AspNetCore.SignalR.Client.Rx** - Empowering Industrial Automation with Reactive Technology ⚡🏭

@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CP.AspNetCore.SignalR.Client.Rx\CP.AspNetCore.SignalR.Client.Rx.csproj" />
+    <ProjectReference Include="..\ReactiveUI.AspNetCore.SignalR.Client.Rx\ReactiveUI.AspNetCore.SignalR.Client.Rx.csproj" />
   </ItemGroup>
 
   <ItemGroup>

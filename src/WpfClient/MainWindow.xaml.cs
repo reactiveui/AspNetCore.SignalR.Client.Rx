@@ -1,5 +1,5 @@
-// Copyright (c) 2019-2026 Chris Pulman and contributors. All rights reserved.
-// Chris Pulman and contributors licenses this file to you under the MIT license.
+// Copyright (c) 2019-2026 ReactiveUI Association Incorporated. All rights reserved.
+// ReactiveUI Association Incorporated licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 #define DEFAULT
@@ -10,6 +10,7 @@ namespace SignalRChatClient;
 /// <summary>Main application window.</summary>
 /// <seealso cref="Window" />
 /// <seealso cref="System.Windows.Markup.IComponentConnector" />
+[DebuggerDisplay("Title = {Title}")]
 public partial class MainWindow : Window
 {
     /// <summary>Initializes a new instance of the <see cref="MainWindow"/> class.</summary>
@@ -19,21 +20,21 @@ public partial class MainWindow : Window
         _ = HubBuilder.Create(static builder => builder.WithUrl("https://localhost:53933/ChatHub"))
             .Subscribe(x =>
             {
-                var connection = x.hubConnection;
-                x.disposables.Add(connection.On(new HubMethod<(string, string)>("ReceiveMessage")).Subscribe(response => Dispatcher.Invoke(() =>
+                var connection = x.HubConnection;
+                x.Disposables.Add(connection.On(new HubMethod<(string, string)>("ReceiveMessage")).Subscribe(response => Dispatcher.Invoke(() =>
                 {
-                    var newMessage = $"{response.t1}: {response.t2}";
+                    var newMessage = $"{response.Value1}: {response.Value2}";
                     _ = messagesList.Items.Add(newMessage);
                 })));
 
-                x.disposables.Add(connection.HasClosed().Subscribe(error => Dispatcher.Invoke(() =>
+                x.Disposables.Add(connection.HasClosed().Subscribe(error => Dispatcher.Invoke(() =>
                 {
                     connectButton.IsEnabled = true;
                     sendButton.IsEnabled = false;
                     _ = messagesList.Items.Add(error);
                 })));
 
-                x.disposables.Add(ObserveClick(connectButton).Start(connection).Subscribe(startedConnection => Dispatcher.Invoke(() =>
+                x.Disposables.Add(ObserveClick(connectButton).Start(connection).Subscribe(startedConnection => Dispatcher.Invoke(() =>
                 {
                     Debug.Assert(startedConnection.State == HubConnectionState.Connected, "Connected");
                     try
@@ -48,7 +49,7 @@ public partial class MainWindow : Window
                     }
                 })));
 
-                x.disposables.Add(ObserveClick(sendButton)
+                x.Disposables.Add(ObserveClick(sendButton)
                     .SelectMany(_ => connection.InvokeObservable("SendMessage", default, userTextBox.Text, messageTextBox.Text))
                     .Subscribe(
                         static _ => Debug.WriteLine("Message sent."),
@@ -76,6 +77,7 @@ namespace SignalRChatClient
 /// </summary>
 /// <seealso cref="System.Windows.Window" />
 /// <seealso cref="System.Windows.Markup.IComponentConnector" />
+[DebuggerDisplay("Title = {Title}")]
 public partial class MainWindow : Window
 {
     /// <summary>
@@ -89,21 +91,21 @@ public partial class MainWindow : Window
                    .WithAutomaticReconnect(new[] { TimeSpan.Zero, TimeSpan.Zero, TimeSpan.FromSeconds(10) }))
             .Subscribe(x =>
             {
-                var connection = x.hubConnection;
-                x.disposables.Add(connection.HasClosed().Subscribe(error =>
+                var connection = x.HubConnection;
+                x.Disposables.Add(connection.HasClosed().Subscribe(error =>
                     Debug.Assert(connection.State == HubConnectionState.Disconnected, "Disconnected")));
 
-                x.disposables.Add(connection.IsReconnecting().Subscribe(_ =>
+                x.Disposables.Add(connection.IsReconnecting().Subscribe(_ =>
                     Debug.Assert(connection.State == HubConnectionState.Reconnecting, "Reconnecting")));
 
-                x.disposables.Add(connection.HasReconnected().Subscribe(_ =>
+                x.Disposables.Add(connection.HasReconnected().Subscribe(_ =>
                     Debug.Assert(connection.State == HubConnectionState.Connected, "Connected")));
 
-                x.disposables.Add(ObserveClick(connectButton).Subscribe(async _ =>
+                x.Disposables.Add(ObserveClick(connectButton).Subscribe(async _ =>
                 {
                     connection.On(new HubMethod<(string, string)>("ReceiveMessage")).Subscribe(x => Dispatcher.Invoke(() =>
                     {
-                        var newMessage = $"{x.t1}: {x.t2}";
+                        var newMessage = $"{x.Value1}: {x.Value2}";
                         messagesList.Items.Add(newMessage);
                     }));
 
@@ -120,7 +122,7 @@ public partial class MainWindow : Window
                     }
                 }));
 
-                x.disposables.Add(ObserveClick(sendButton).Subscribe(async _ =>
+                x.Disposables.Add(ObserveClick(sendButton).Subscribe(async _ =>
                 {
                     try
                     {
