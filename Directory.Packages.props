@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <RoslynAnalysersVersion>5.1.4</RoslynAnalysersVersion>
-    <PrimitivesVersion>9.0.0</PrimitivesVersion>
+    <PrimitivesVersion>10.2.3</PrimitivesVersion>
     <MicrosoftRuntimePackageVersion>10.0.13</MicrosoftRuntimePackageVersion>
     <MicrosoftRuntimePackageVersion Condition="'$(TargetFramework)' == 'net8.0'">8.0.32</MicrosoftRuntimePackageVersion>
     <MicrosoftRuntimePackageVersion Condition="'$(TargetFramework)' == 'net9.0'">9.0.21</MicrosoftRuntimePackageVersion>
