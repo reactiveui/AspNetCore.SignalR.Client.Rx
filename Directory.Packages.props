@@ -16,7 +16,7 @@
     <PackageVersion Include="System.Security.Cryptography.Xml" Version="10.0.15" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.403" />
     <PackageVersion Include="MinVer" Version="8.0.0" />
-    <PackageVersion Include="NuGet.Frameworks" Version="7.9.0" />
+    <PackageVersion Include="NuGet.Frameworks" Version="8.0.0" />
     <PackageVersion Include="Nuke.Common" Version="10.1.0" />
     <PackageVersion Include="ReactiveUI.Primitives" Version="$(PrimitivesVersion)" />
     <PackageVersion Include="ReactiveUI.Primitives.Reactive" Version="$(PrimitivesVersion)" />
