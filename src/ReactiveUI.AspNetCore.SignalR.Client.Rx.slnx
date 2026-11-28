@@ -16,5 +16,9 @@
   <Project Path="ReactiveUI.AspNetCore.SignalR.Client.Rx.Tests/ReactiveUI.AspNetCore.SignalR.Client.Rx.Tests.csproj" />
   <Project Path="ReactiveUI.AspNetCore.SignalR.Client.Rx/ReactiveUI.AspNetCore.SignalR.Client.Rx.csproj" />
   <Project Path="SampleWeb/SignalRChat.csproj" />
+  <Folder Name="/Examples/">
+    <Project Path="examples/OrderUpdates/OrderUpdates.csproj" />
+    <Project Path="examples/OrderUpdates.Reactive/OrderUpdates.Reactive.csproj" />
+  </Folder>
   <Project Path="WpfClient/SignalRChatClient.csproj" />
 </Solution>
