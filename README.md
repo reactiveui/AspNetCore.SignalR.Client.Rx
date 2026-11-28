@@ -1,4 +1,15 @@
+<div align="center">
+
+<a href="https://github.com/reactiveui/AspNetCore.SignalR.Client.Rx"><img src="https://raw.githubusercontent.com/reactiveui/styleguide/master/logo/logo.svg" alt="ReactiveUI.AspNetCore.SignalR.Client.Rx" width="128"></a>
+
 # ReactiveUI.AspNetCore.SignalR.Client.Rx
+
+[![Build](https://img.shields.io/github/actions/workflow/status/reactiveui/AspNetCore.SignalR.Client.Rx/BuildOnly.yml?branch=main&label=build&logo=githubactions&logoColor=white)](https://github.com/reactiveui/AspNetCore.SignalR.Client.Rx/actions/workflows/BuildOnly.yml)
+[![License](https://img.shields.io/github/license/reactiveui/AspNetCore.SignalR.Client.Rx?color=blue)](https://github.com/reactiveui/AspNetCore.SignalR.Client.Rx/blob/main/LICENSE)
+[![Discussions](https://img.shields.io/badge/discussions-ask%20a%20question-8A2BE2?logo=github&logoColor=white)](https://github.com/reactiveui/AspNetCore.SignalR.Client.Rx/discussions)
+
+</div>
+
 ReactiveUI.Primitives extensions for Microsoft.AspNetCore.SignalR.Client.
 
 ## Installation
@@ -162,8 +173,32 @@ MIT
 
 ---
 
-
 **ReactiveUI.AspNetCore.SignalR.Client.Rx** - Empowering Industrial Automation with Reactive Technology ⚡🏭
+
+## Contribute
+
+ReactiveUI.AspNetCore.SignalR.Client.Rx is part of [ReactiveUI](https://github.com/reactiveui) and is released under the [MIT license](https://github.com/reactiveui/AspNetCore.SignalR.Client.Rx/blob/main/LICENSE). We welcome contributions of every size, from bug reports and documentation to features and tests.
+
+- **Questions:** ask in [GitHub Discussions](https://github.com/reactiveui/AspNetCore.SignalR.Client.Rx/discussions).
+- **Bugs and feature requests:** open a [GitHub issue](https://github.com/reactiveui/AspNetCore.SignalR.Client.Rx/issues/new/choose).
+- **Larger changes:** open an issue or discussion first, so we can agree on the approach before you start.
+- **Contributor guide:** read [reactiveui.net/contribute](https://www.reactiveui.net/contribute/) for [building and testing](https://www.reactiveui.net/contribute/building-and-testing/) and [pull requests](https://www.reactiveui.net/contribute/pull-requests/).
+
+### Coding standards
+
+Every pull request must meet these standards. The build checks most of them.
+
+- Follow the [ReactiveUI C# style guide](https://www.reactiveui.net/contribute/software-style-guide/code-style/).
+- The repository's `.editorconfig` and the StyleSharp, PerformanceSharp and SecuritySharp analyzers run on every build. Fix each finding in the code. Do not suppress it or relax the `.editorconfig`.
+- Add tests for every bug fix and new feature.
+- Document public APIs with XML documentation comments.
+- Write commit messages in the [Conventional Commits](https://www.reactiveui.net/contribute/software-style-guide/commit-message-convention/) format.
+- Follow the [Code of Conduct](https://github.com/reactiveui/.github/blob/main/CODE_OF_CONDUCT.md).
+
+### Support the project
+
+- Sponsor the maintainers on GitHub Sponsors: [reactivemarbles](https://github.com/sponsors/reactivemarbles), [glennawatson](https://github.com/sponsors/glennawatson) and [chrispulman](https://github.com/sponsors/chrispulman).
+- Ask your employer to support open source, for example with the [balanced employee IP agreement](https://github.com/github/balanced-employee-ip-agreement).
 
 ## Sponsors
 
