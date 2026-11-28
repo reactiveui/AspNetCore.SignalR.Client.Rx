@@ -189,7 +189,7 @@ jobs:
 
       - name: Stamp version with MinVer
         id: minver
-        uses: reactiveui/actions-common/.github/actions/minver@328a9bc8c0403e44969e5283389622094ceddd16
+        uses: reactiveui/actions-common/.github/actions/minver@b5f45cc558f474fbb9cc6e5c38cff9ca34d7ce79
         with:
           tag-prefix: v
           minimum-major-minor: ${{ env.minMajorMinorVersion }}
@@ -475,7 +475,7 @@ jobs:
 
   create-release:
     needs: [release, publish-nuget]
-    uses: reactiveui/actions-common/.github/workflows/workflow-common-create-release.yml@328a9bc8c0403e44969e5283389622094ceddd16
+    uses: reactiveui/actions-common/.github/workflows/workflow-common-create-release.yml@b5f45cc558f474fbb9cc6e5c38cff9ca34d7ce79
     with:
       version: ${{ needs.release.outputs.semver2 }}
       tag: ${{ needs.release.outputs.tag }}
